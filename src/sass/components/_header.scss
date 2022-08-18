@@ -1,0 +1,13 @@
+@use "../abstracts/variabels" as *;
+@use "../abstracts/mixin";
+
+.header{
+    .icon__back{
+        color: $primary;
+        font-size: 30px;
+    }
+    .icon__search{
+        @include mixin.button;
+        padding: 0;
+    }
+}
