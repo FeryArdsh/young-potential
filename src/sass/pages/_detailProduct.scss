@@ -1,0 +1,18 @@
+@use "../abstracts/variabels" as *;
+
+.detail__product{
+    &__category{
+        display: inline-block;
+        padding: 4px 12px 4px 12px;
+        background-color: #EBEBEB;
+        border-radius: 100px;
+        color: $gray;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    &__description{
+        font-weight: 400;
+        font-size: 12px;
+        color: $gray;
+    }
+}

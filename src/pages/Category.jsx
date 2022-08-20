@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import axios from "axios";
 import Header from "../components/Header";
 import categoryImg from "../assets/category.png";
+import capitalize from "../utils/firstCapitalize";
 
 const Category = () => {
     const [category, setCategory] = useState([]);
@@ -21,16 +22,16 @@ const Category = () => {
 
     useEffect(() => {
         getListCategory();
+        console.log(category);
     }, []);
 
     const handleClickCategory = (i) => {
         navigate(`${i}`);
     };
 
-    console.log(category);
     return (
         <div>
-            <Header />
+            <Header title="Detail Toko" />
             <h6 className="fw600 mb-4">Kategori Produk</h6>
             <div className="d-flex justify-content-between flex-wrap">
                 {category?.map((cat, i) => (
@@ -46,11 +47,14 @@ const Category = () => {
                                 alt="category"
                             />
                         </div>
-                        <div>{cat}</div>
+                        <div>{capitalize(cat)}</div>
                     </div>
                 ))}
             </div>
-            <Button />
+            <Button
+                text="Jadikan Toko Favorite"
+                style="btn-primary btn-shadow"
+            />
         </div>
     );
 };

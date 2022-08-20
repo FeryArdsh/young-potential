@@ -5,9 +5,14 @@
     .icon__back{
         color: $primary;
         font-size: 30px;
+        margin-right: 2px;
+        margin-top: 2px;
+        border: none;
+        background: transparent;
     }
     .icon__search{
-        @include mixin.button;
+        background-color: transparent;
+        border: none;
         padding: 0;
     }
 }

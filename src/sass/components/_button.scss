@@ -1,5 +1,37 @@
 @use "../abstracts/variabels" as *;
+@use "../abstracts/mixin";
 
-.btn__category{
-    background-color: red;
+@mixin button-primary {
+    border-radius: 100px;
+    width: 100%;
+    max-height: 37px;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.btn-primary{
+    @include button-primary;
+    background-color: $primary;
+    color: #FFFFFF;
+    border: none;
+
+    &:hover{
+        @include mixin.btn-hover($green, $white)
+    }
+}
+
+.btn-secondary{
+    @include button-primary;
+    background-color: $white;
+    border: 1px solid $primary;
+    color: $primary;
+    
+
+    &:hover{
+        @include mixin.btn-hover($primary, $white);
+    }
+}
+
+.btn-shadow{
+    box-shadow: 0px 8px 16px rgba(3, 172, 14, 0.24);
 }

@@ -1,6 +1,8 @@
 @use "./components/button";
 @use "./components/header";
 @use "./components/cardCategory";
+@use "./pages/productByCategory";
+@use "./pages/detailProduct";
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
 
 
@@ -24,4 +26,9 @@
 
 .fw400{
     font-weight: 400;
+}
+
+.fw600-fs14{
+    font-weight: 600;
+    font-size: 14px;
 }

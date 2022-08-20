@@ -1,15 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ title }) => {
+    const navigate = useNavigate();
     return (
         <>
             <div className="header d-flex align-items-center justify-content-between my-3">
                 <div className="d-flex align-items-center">
-                    <Link to="/" className="icon__back">
+                    <button onClick={() => navigate(-1)} className="icon__back">
                         <i className="bi bi-arrow-left-short"></i>
-                    </Link>
-                    <h6 className="fw600 d-inline m-0">Detail Toko</h6>
+                    </button>
+                    <h6 className="fw600 d-inline m-0">{title}</h6>
                 </div>
                 <div>
                     <button className="icon__search">

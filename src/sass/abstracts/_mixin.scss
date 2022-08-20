@@ -1,4 +1,6 @@
-@mixin button {
-    background-color: transparent;
-    border: none;
+@use "../abstracts/variabels" as *;
+
+@mixin btn-hover($bg, $color) {
+    background-color: $bg;
+    color: $color;
 }

@@ -1,17 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Button from "../components/Button";
 import Header from "../components/Header";
 import { endpoint } from "../utils/fetchApi";
+import capitalize from "../utils/firstCapitalize";
 
 const ProductByCategory = () => {
     const [products, setProducts] = useState([]);
-    const { id } = useParams();
+    const { categoryName } = useParams();
+    const navigate = useNavigate();
 
     const getProductByCategory = async () => {
         try {
             const response = await axios.get(
-                `${endpoint.getProductByCategory}/${id}`
+                `${endpoint.getProductByCategory}/${categoryName}`
             );
             setProducts(response.data.products);
         } catch (error) {}
@@ -21,18 +24,47 @@ const ProductByCategory = () => {
         getProductByCategory();
     }, []);
 
-    console.log(products);
+    const onDetailProduct = (id) => {
+        navigate(`/detail-product/${id}`);
+    };
+
     return (
         <>
-            <Header />
-            {products?.map((item) => (
-                <div key={item.id}>
-                    <div className="img__bycategory">
-                        <img src={item.images[0]} alt="" />
+            <Header title={capitalize(categoryName)} />
+            <div className="d-flex flex-wrap">
+                {products?.map((item) => (
+                    <div
+                        key={item.id}
+                        className="bycategory__container mx-auto"
+                    >
+                        <div
+                            className="bycategory"
+                            onClick={() => onDetailProduct(item.id)}
+                        >
+                            <div className="bycategory__img">
+                                <img
+                                    src={item.images[0]}
+                                    alt=""
+                                    className="img-fluid"
+                                />
+                            </div>
+                            <div className="bycategory__title__container">
+                                {/* <span className="bycategory__title fw400"> */}
+                                {item.title}
+                                {/* </span> */}
+                            </div>
+
+                            <span className="bycategory__price fw600">
+                                Rp. {item.price * 1000}
+                            </span>
+                        </div>
+
+                        <div>
+                            <Button text="Tambah" style="btn-secondary" />
+                        </div>
                     </div>
-                    {item.title}
-                </div>
-            ))}
+                ))}
+            </div>
         </>
     );
 };
