@@ -1,0 +1,19 @@
+@use "../abstracts/variabels" as * ;
+
+.login{
+    &__title{
+        color: $primary;
+    }
+    &__choice{
+        font-size: 12px;
+        color: $gray;
+        margin: 20px 0;
+    }
+    &__text{
+        font-size: 12px;
+        margin: 16px 0;
+    }
+    &__form{
+        width: 100%;
+    }
+}

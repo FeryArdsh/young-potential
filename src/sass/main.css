@@ -2,7 +2,6 @@
 .btn-primary {
   border-radius: 100px;
   width: 100%;
-  max-height: 37px;
   padding: 8px;
   font-size: 14px;
   background-color: #03AC0E;
@@ -10,14 +9,13 @@
   border: none;
 }
 .btn-primary:hover {
-  background-color: #049C0E;
-  color: #FAFAFA;
+  background-color: #049C0E !important;
+  color: #FAFAFA !important;
 }
 
 .btn-secondary {
   border-radius: 100px;
   width: 100%;
-  max-height: 37px;
   padding: 8px;
   font-size: 14px;
   background-color: #FAFAFA;
@@ -25,8 +23,8 @@
   color: #03AC0E;
 }
 .btn-secondary:hover {
-  background-color: #03AC0E;
-  color: #FAFAFA;
+  background-color: #03AC0E !important;
+  color: #FAFAFA !important;
 }
 
 .btn-shadow {
@@ -56,6 +54,70 @@
 }
 .category__card:hover {
   transform: scale(1.1);
+}
+
+.input {
+  width: 100%;
+  padding: 15px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  padding-left: 50px;
+  border: none;
+  background-color: #F5F5F5;
+  border-radius: 100px;
+  outline: none;
+  border: 1px solid transparent;
+}
+.input__label {
+  position: absolute;
+  top: 22px;
+  left: 8px;
+  transition: all 200ms;
+  font-size: 14px;
+  color: #7A7A7A;
+  pointer-events: none;
+}
+.input:focus, .input:valid {
+  border: 1px solid #03AC0E;
+}
+.input:focus ~ .input__label, .input:valid ~ .input__label {
+  top: 8px;
+  left: 4px;
+  font-weight: 600;
+  font-size: 10px;
+}
+.input__icon {
+  position: absolute;
+  left: 20px;
+  top: 14px;
+  padding: 10px 10px;
+  font-size: 12px;
+}
+
+.input__otp {
+  width: 74px;
+  height: 74px;
+  border-radius: 16px;
+  background-color: #F5F5F5;
+  border: none;
+  outline: none;
+  text-align: center;
+}
+.input__otp::-moz-placeholder {
+  font-weight: 500;
+  color: #292929;
+}
+.input__otp:-ms-input-placeholder {
+  font-weight: 500;
+  color: #292929;
+}
+.input__otp::placeholder {
+  font-weight: 500;
+  color: #292929;
+}
+.input__otp::-webkit-outer-spin-button, .input__otp::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .bycategory__container {
@@ -112,6 +174,22 @@
   color: #7A7A7A;
 }
 
+.login__title {
+  color: #03AC0E;
+}
+.login__choice {
+  font-size: 12px;
+  color: #7A7A7A;
+  margin: 20px 0;
+}
+.login__text {
+  font-size: 12px;
+  margin: 16px 0;
+}
+.login__form {
+  width: 100%;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -136,5 +214,9 @@
 
 .fw600-fs14 {
   font-weight: 600;
+  font-size: 14px;
+}
+
+.fs14 {
   font-size: 14px;
 }/*# sourceMappingURL=main.css.map */

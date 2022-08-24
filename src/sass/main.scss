@@ -1,8 +1,10 @@
 @use "./components/button";
 @use "./components/header";
 @use "./components/cardCategory";
+@use "./components/input";
 @use "./pages/productByCategory";
 @use "./pages/detailProduct";
+@use "./pages/login";
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
 
 
@@ -30,5 +32,9 @@
 
 .fw600-fs14{
     font-weight: 600;
+    font-size: 14px;
+}
+
+.fs14{
     font-size: 14px;
 }

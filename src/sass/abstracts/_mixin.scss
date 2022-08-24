@@ -1,6 +1,6 @@
 @use "../abstracts/variabels" as *;
 
 @mixin btn-hover($bg, $color) {
-    background-color: $bg;
-    color: $color;
+    background-color: $bg !important;
+    color: $color !important;
 }
