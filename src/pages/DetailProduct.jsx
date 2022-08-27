@@ -24,7 +24,6 @@ const DetailProduct = () => {
         getData();
     }, []);
 
-    console.log(data);
     return (
         <>
             <Header title="Detail Produk" />

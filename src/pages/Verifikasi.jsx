@@ -2,11 +2,11 @@ import React from "react";
 import Header from "../components/Header";
 import verifikasi from "../assets/verifikasi.png";
 import Button from "../components/Button";
-import useForm from "../hooks/useForm";
+import useCustomForm from "../hooks/useCustomForm";
 import { useNavigate } from "react-router-dom";
 
 const Verifikasi = () => {
-    const { handleSubmit } = useForm(verif);
+    const { handleSubmit } = useCustomForm(verif);
     const navigate = useNavigate();
 
     const inputfocus = (elmnt) => {
