@@ -1,23 +1,7 @@
 import React, { useState } from "react";
 
-const Input = ({
-    icon,
-    text,
-    type,
-    name,
-    register,
-    thisRequired,
-    isError,
-    validation,
-}) => {
+const Input = ({ icon, text, type, name, register, isError, validation }) => {
     const [change, setChange] = useState("");
-
-    // Isi Validation :
-
-    // maxLength: {
-    //     value: 2,
-    //     message: "Tidak boleh kurang dari 2",
-    // }
 
     return (
         <>
@@ -31,8 +15,7 @@ const Input = ({
                         onChange: (e) => {
                             setChange(e.target.value);
                         },
-                        required: thisRequired,
-                        // Cara memasukkan validation sesuai obcejt
+                        ...validation,
                     })}
                 />
                 <label className="ms-5 input__label fw400" htmlFor="noTlp">

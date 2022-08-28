@@ -6,10 +6,10 @@ import Input from "../components/Input";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { endpoint } from "../utils/fetchApi";
+import Swal from "sweetalert2";
 
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../config/FirebaseConfig";
-import { async } from "@firebase/util";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -31,6 +31,7 @@ const Login = () => {
                 },
             });
             localStorage.setItem("firstName", response.data.firstName);
+            await Swal.fire("Login Berhasil!", "", "success");
             navigate("/");
         } catch (error) {
             console.log(error.response.data.message);
@@ -43,8 +44,8 @@ const Login = () => {
     const handleSignInGoogle = () => {
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider).then((result) => {
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
+            // const credential = GoogleAuthProvider.credentialFromResult(result);
+            // const token = credential.accessToken;
             const user = result.user;
             localStorage.setItem("firstName", user.displayName);
             if (user) {
@@ -74,32 +75,33 @@ const Login = () => {
                     icon="bi bi-person"
                     name="username"
                     register={register}
-                    thisRequired={true}
                     validation={{
-                        maxLength: {
-                            value: 2,
-                            message: "Tidak boleh kurang dari 2",
-                        },
+                        required: "Username Tidak Boleh Kosong",
                     }}
                     isError={errors.username?.type}
                 />
-                <span className="fw400 fs10 err-color text-center d-block mt-2 mb-3">
-                    {errors.username?.type === "required" &&
-                        "Username Tidak Boleh Kosong"}
-                </span>
+                {errors.username && (
+                    <span className="fw400 fs10 err-color text-center d-block mt-2 mb-3">
+                        {errors.username?.message}
+                    </span>
+                )}
+
                 <Input
                     type="password"
                     text="Password"
                     icon="bi bi-file-lock"
                     name="password"
                     register={register}
-                    thisRequired={true}
+                    validation={{
+                        required: "Password Tidak Boleh Kosong",
+                    }}
                     isError={errors.password?.type}
                 />
-                <span className="fw400 fs10 err-color text-center d-block mt-2 mb-3">
-                    {errors.password?.type === "required" &&
-                        "Password Tidak Boleh Kosong"}
-                </span>
+                {errors.password && (
+                    <span className="fw400 fs10 err-color text-center d-block mt-2 mb-3">
+                        {errors.password?.message}
+                    </span>
+                )}
 
                 <Button text="Masuk" style="btn-primary p-3 mt-3" />
             </form>
