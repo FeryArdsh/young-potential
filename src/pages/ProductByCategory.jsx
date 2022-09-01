@@ -31,9 +31,9 @@ const ProductByCategory = () => {
     return (
         <>
             <Header title={capitalize(categoryName)} />
-            <div className="d-flex flex-wrap">
+            <main className="d-flex flex-wrap">
                 {products?.map((item) => (
-                    <div
+                    <section
                         key={item.id}
                         className="bycategory__container mx-auto"
                     >
@@ -54,17 +54,17 @@ const ProductByCategory = () => {
                                 {/* </span> */}
                             </div>
 
-                            <span className="bycategory__price fw600">
+                            <div className="bycategory__price fw600">
                                 Rp. {item.price * 1000}
-                            </span>
+                            </div>
                         </div>
 
                         <div>
                             <Button text="Tambah" style="btn-secondary" />
                         </div>
-                    </div>
+                    </section>
                 ))}
-            </div>
+            </main>
         </>
     );
 };

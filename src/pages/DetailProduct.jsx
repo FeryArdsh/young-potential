@@ -28,7 +28,7 @@ const DetailProduct = () => {
         <>
             <Header title="Detail Produk" />
             {data && (
-                <div className="p-1 detail__product">
+                <main className="p-1 detail__product">
                     <img
                         src={data.images[0]}
                         alt={data.title}
@@ -38,21 +38,21 @@ const DetailProduct = () => {
                         <span>{capitalize(data.category)}</span>
                     </div>
                     <div>
-                        <span className="fw600-fs14 d-block">{data.title}</span>
-                        <span className="fw600-fs14">
+                        <div className="fw600-fs14 d-block">{data.title}</div>
+                        <div className="fw600-fs14">
                             Rp. {data.price * 1000}
-                        </span>
+                        </div>
                     </div>
-                    <div className="mt-5 mb-3">
-                        <span className="fw600-fs14 d-block">
+                    <section className="mt-5 mb-3">
+                        <div className="fw600-fs14 d-block">
                             Deskripsi Produk
-                        </span>
+                        </div>
                         <span className="detail__product__description">
                             {data.description}
                         </span>
-                    </div>
+                    </section>
                     <Button text="Tambah Pesanan" style="btn-primary" />
-                </div>
+                </main>
             )}
         </>
     );

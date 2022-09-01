@@ -1,22 +1,25 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import Input from "../components/Input";
 
 const Register = () => {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const onRegister = ({ name }) => {
-        console.log(name);
+    const onRegister = ({ name, tlp, referal }) => {
+        console.log(name, tlp, referal);
+        navigate("/verifikasi");
     };
 
     return (
-        <div>
+        <main>
             <Header title="Daftar Baru" />
             <form onSubmit={handleSubmit(onRegister)}>
                 <Input
@@ -25,26 +28,36 @@ const Register = () => {
                     icon="bi bi-person"
                     name="name"
                     register={register}
-                    thisRequired={true}
+                    validation={{
+                        required: "Nama Tidak Boleh Kosong",
+                    }}
                     isError={errors.name?.type}
                 />
-                <span className="fw400 fs10 err-color text-center d-block mt-2 mb-3">
-                    {errors.name?.type === "required" &&
-                        "Username Tidak Boleh Kosong"}
-                </span>
+                {errors.name && (
+                    <span className="fw400 fs10 err-color text-center d-block mt-2 mb-3">
+                        {errors.name?.message}
+                    </span>
+                )}
                 <Input
                     type="text"
                     text="Nomor Hp"
                     icon="bi bi-telephone"
                     name="tlp"
                     register={register}
-                    thisRequired={true}
+                    validation={{
+                        required: "No. Telepon Tidak Boleh Kosong",
+                        pattern: {
+                            value: /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9]{10})+$/i,
+                            message: "No. Telepon Tidak Valid",
+                        },
+                    }}
                     isError={errors.tlp?.type}
                 />
-                <span className="fw400 fs10 err-color text-center d-block mt-2 mb-3">
-                    {errors.tlp?.type === "required" &&
-                        "Username Tidak Boleh Kosong"}
-                </span>
+                {errors.tlp && (
+                    <span className="fw400 fs10 err-color text-center d-block mt-2 mb-3">
+                        {errors.tlp?.message}
+                    </span>
+                )}
                 <Input
                     type="text"
                     text="Kode Referal (Opsional)"
@@ -54,13 +67,9 @@ const Register = () => {
                     thisRequired={true}
                     isError={errors.referal?.type}
                 />
-                <span className="fw400 fs10 err-color text-center d-block mt-2 mb-3">
-                    {errors.referal?.type === "required" &&
-                        "Username Tidak Boleh Kosong"}
-                </span>
                 <Button text="Daftar" style="btn-primary mt-5" />
             </form>
-        </div>
+        </main>
     );
 };
 

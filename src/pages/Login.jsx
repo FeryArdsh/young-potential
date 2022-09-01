@@ -34,9 +34,12 @@ const Login = () => {
             await Swal.fire("Login Berhasil!", "", "success");
             navigate("/");
         } catch (error) {
-            console.log(error.response.data.message);
             if (error.response.data.message === "Invalid credentials") {
-                setErrLogin("Username atau Password Salah");
+                await Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Username atau Password Salah!",
+                });
             }
         }
     };
@@ -62,7 +65,7 @@ const Login = () => {
     };
 
     return (
-        <div className="login d-flex flex-column align-items-center">
+        <main className="login d-flex flex-column align-items-center">
             <img className="mx-auto my-5" src={cuate} alt="" />
 
             <h4 className="mb-0 fw-bold login__title">Hai, fren!</h4>
@@ -105,21 +108,21 @@ const Login = () => {
 
                 <Button text="Masuk" style="btn-primary p-3 mt-3" />
             </form>
-            <span className="fw600 login__choice">Atau Login Melalui</span>
+            <div className="fw600 login__choice">Atau Login Melalui</div>
 
             <Button
                 onClick={authGoogle}
                 text="Google"
                 style="btn-secondary p-3 text-black"
             />
-            <span className="fw400 login__text">
+            <div className="fw400 login__text">
                 Belum punya akun? Daftar <Link to="/register">Di Sini</Link>
-            </span>
-            <span className="fw400 login__text mt-0">
+            </div>
+            <section className="fw400 login__text mt-0">
                 Dengan masuk atau mendaftar, kamu menyetujui Ketentuan Layanan
                 dan Kebijakan Privasi
-            </span>
-        </div>
+            </section>
+        </main>
     );
 };
 

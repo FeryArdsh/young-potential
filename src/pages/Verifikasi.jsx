@@ -4,6 +4,7 @@ import verifikasi from "../assets/verifikasi.png";
 import Button from "../components/Button";
 import useCustomForm from "../hooks/useCustomForm";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Verifikasi = () => {
     const { handleSubmit } = useCustomForm(verif);
@@ -16,8 +17,6 @@ const Verifikasi = () => {
                 elmnt.target.form.elements[next].focus();
             }
         } else {
-            console.log("next");
-
             const next = elmnt.target.tabIndex;
             if (next < 4) {
                 elmnt.target.form.elements[next].focus();
@@ -26,12 +25,13 @@ const Verifikasi = () => {
     };
 
     function verif() {
+        Swal.fire("Yeyy!!!", "Verifikasi Berhasil", "success");
         navigate("/login");
     }
     return (
-        <div>
+        <>
             <Header title="Verifikasi OTP" />
-            <div className="d-flex flex-column align-items-center pt-3">
+            <main className="d-flex flex-column align-items-center pt-3">
                 <img src={verifikasi} alt="verifikasi" />
                 <h6 className="fw-bold mt-3">Verifikasi Kode OTP</h6>
                 <div className="px-5 text-center">
@@ -43,7 +43,7 @@ const Verifikasi = () => {
                     onSubmit={handleSubmit}
                     className=" px-0 container-fluid mt-4"
                 >
-                    <div className="d-flex justify-content-between mb-5">
+                    <section className="d-flex justify-content-between mb-5">
                         <input
                             className="input__otp"
                             tabIndex="1"
@@ -84,11 +84,11 @@ const Verifikasi = () => {
                             id="4"
                             placeholder="-"
                         />
-                    </div>
+                    </section>
                     <Button text="Kirim" style="btn-primary mt-5" />
                 </form>
-            </div>
-        </div>
+            </main>
+        </>
     );
 };
 

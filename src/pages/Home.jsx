@@ -7,8 +7,12 @@ const Home = () => {
         <>
             <h1>Home</h1>
             <h3 className="text-success">Welcome Back {name}!!!</h3>
-            <Link to="category">See Category</Link>
-            <Link to="login">Go to Login</Link>
+            <div>
+                <Link to="category">See Category</Link>
+            </div>
+            <div>
+                <Link to="login">Go to Login</Link>
+            </div>
         </>
     );
 };

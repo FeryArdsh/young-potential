@@ -33,9 +33,9 @@ const Category = () => {
         <div>
             <Header title="Detail Toko" />
             <h6 className="fw600 mb-4">Kategori Produk</h6>
-            <div className="d-flex justify-content-between flex-wrap">
+            <main className="d-flex justify-content-between flex-wrap">
                 {category?.map((cat, i) => (
-                    <div
+                    <section
                         key={i}
                         onClick={() => handleClickCategory(cat)}
                         className="category__card fw400 text-center"
@@ -48,9 +48,9 @@ const Category = () => {
                             />
                         </div>
                         <div>{capitalize(cat)}</div>
-                    </div>
+                    </section>
                 ))}
-            </div>
+            </main>
             <Button
                 text="Jadikan Toko Favorite"
                 style="btn-primary btn-shadow"
