@@ -13,7 +13,6 @@ import { auth } from "../config/FirebaseConfig";
 
 const Login = () => {
     const navigate = useNavigate();
-    const [errLogin, setErrLogin] = useState("");
     const {
         register,
         handleSubmit,
@@ -30,7 +29,9 @@ const Login = () => {
                     password: password,
                 },
             });
+            console.log(response);
             localStorage.setItem("firstName", response.data.firstName);
+            localStorage.setItem("id", response.data.id);
             await Swal.fire("Login Berhasil!", "", "success");
             navigate("/");
         } catch (error) {
@@ -71,7 +72,6 @@ const Login = () => {
             <h4 className="mb-0 fw-bold login__title">Hai, fren!</h4>
             <p>Selamat Datang di Aplikasi WoiShop</p>
             <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
-                <p className="text-danger text-center">{errLogin}</p>
                 <Input
                     type="text"
                     text="Username"

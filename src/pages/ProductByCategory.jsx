@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import { endpoint } from "../utils/fetchApi";
@@ -18,6 +19,37 @@ const ProductByCategory = () => {
             );
             setProducts(response.data.products);
         } catch (error) {}
+    };
+
+    const addToCart = async () => {
+        try {
+            const response = await axios("https://dummyjson.com/carts/add", {
+                method: "post",
+                headers: { "Content-Type": "application/json" },
+                data: JSON.stringify({
+                    userId: 1,
+                    products: [
+                        {
+                            id: 1,
+                            quantity: 1,
+                        },
+                        {
+                            id: 50,
+                            quantity: 2,
+                        },
+                    ],
+                }),
+            });
+            console.log(response);
+            Swal.fire({
+                icon: "success",
+                title: "Produk berhasil ditambahkan",
+                text: "",
+                footer: '<a href="http://127.0.0.1:5173/carts">Lihat keranjang Anda</a>',
+            });
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
@@ -49,9 +81,7 @@ const ProductByCategory = () => {
                                 />
                             </div>
                             <div className="bycategory__title__container">
-                                {/* <span className="bycategory__title fw400"> */}
                                 {item.title}
-                                {/* </span> */}
                             </div>
 
                             <div className="bycategory__price fw600">
@@ -60,7 +90,11 @@ const ProductByCategory = () => {
                         </div>
 
                         <div>
-                            <Button text="Tambah" style="btn-secondary" />
+                            <Button
+                                text="Tambah"
+                                style="btn-secondary"
+                                onClick={addToCart}
+                            />
                         </div>
                     </section>
                 ))}

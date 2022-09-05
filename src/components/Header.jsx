@@ -5,7 +5,7 @@ const Header = ({ title }) => {
     const navigate = useNavigate();
     return (
         <>
-            <div className="header d-flex align-items-center justify-content-between my-3">
+            <header className="header d-flex align-items-center justify-content-between my-3">
                 <div className="d-flex align-items-center">
                     <button onClick={() => navigate(-1)} className="icon__back">
                         <i className="bi bi-arrow-left-short"></i>
@@ -17,7 +17,7 @@ const Header = ({ title }) => {
                         <i className="bi bi-search"></i>
                     </button>
                 </div>
-            </div>
+            </header>
         </>
     );
 };

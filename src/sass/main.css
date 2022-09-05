@@ -6,7 +6,7 @@
   font-size: 14px;
   background-color: #03AC0E;
   color: #FFFFFF;
-  border: none;
+  border: 1px solid transparent;
 }
 .btn-primary:hover {
   background-color: #049C0E !important;
@@ -29,6 +29,10 @@
 
 .btn-shadow {
   box-shadow: 0px 8px 16px rgba(3, 172, 14, 0.24);
+}
+
+.fs13 {
+  font-size: 14px;
 }
 
 .header .icon__back {
@@ -120,6 +124,53 @@
   margin: 0;
 }
 
+.radio {
+  background-color: #FAFAFA;
+  border: 1px solid #ebebeb;
+  border-radius: 16px;
+  margin: 16px 0;
+}
+.radio__lable {
+  width: 100%;
+  text-align: left;
+}
+.radio__icon {
+  width: 30px;
+  height: 30px;
+}
+
+input[name=delivery] {
+  accent-color: green !important;
+  width: 24px;
+  height: 24px;
+}
+
+.pesanan__tambah {
+  color: #049C0E;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.order__delete {
+  color: #ccc;
+  border: none;
+  padding: 0;
+  font-size: 20px;
+  background-color: transparent;
+}
+.order__delete:hover {
+  color: rgb(97, 97, 97);
+}
+.order__btn {
+  width: 23px;
+  height: 10px;
+}
+.order__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .bycategory__container {
   width: 104px;
   margin-bottom: 30px;
@@ -206,6 +257,10 @@
 
 .fw600 {
   font-weight: 600;
+}
+
+.fw500 {
+  font-weight: 500;
 }
 
 .fw400 {

@@ -1,0 +1,32 @@
+@use "../abstracts/variabels" as *;
+
+.radio{
+    background-color: $white;
+    border: 1px solid #ebebeb;
+    border-radius: 16px;
+    margin: 16px 0;
+
+    &__lable{
+        width: 100%;
+        text-align: left;
+    }
+    
+    &__icon{
+        width: 30px;
+        height: 30px;
+    }
+}
+
+input[name="delivery"]{
+    accent-color: green !important;
+    width: 24px;
+    height: 24px;
+}
+
+.pesanan{
+    &__tambah{
+        color: $green;
+        font-size: 12px;
+        cursor: pointer;
+    }
+}

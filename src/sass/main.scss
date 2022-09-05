@@ -2,6 +2,8 @@
 @use "./components/header";
 @use "./components/cardCategory";
 @use "./components/input";
+@use "./components/radioBtn";
+@use "./components/order";
 @use "./pages/productByCategory";
 @use "./pages/detailProduct";
 @use "./pages/login";
@@ -24,6 +26,10 @@
 
 .fw600{
     font-weight: 600;
+}
+
+.fw500{
+    font-weight: 500;
 }
 
 .fw400{

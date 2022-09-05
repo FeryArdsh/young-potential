@@ -1,0 +1,22 @@
+.order {
+    &__delete {
+        color: #ccc;
+        border: none;
+        padding: 0;
+        font-size: 20px;
+        background-color: transparent;
+        &:hover {
+            color: rgb(97, 97, 97);
+        }
+    }
+    &__btn {
+        width: 23px;
+        height: 10px;
+    }
+
+    &__title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

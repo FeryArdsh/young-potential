@@ -4,7 +4,11 @@ import google from "../assets/google.png";
 const Button = ({ text, style, onClick }) => {
     const icon = (icon) => {
         if (icon === "Google") {
-            return <img src={google} alt="" />;
+            return (
+                <div className="me-2 d-inline">
+                    <img src={google} alt="" />
+                </div>
+            );
         } else {
             return null;
         }
@@ -12,7 +16,7 @@ const Button = ({ text, style, onClick }) => {
     return (
         <>
             <button onClick={onClick} className={`fw600 ${style}`}>
-                <div className="me-2 d-inline">{icon(text)}</div>
+                {icon(text)}
                 {text}
             </button>
         </>
