@@ -1,47 +1,27 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Button from "./Button";
+import { decrease, increase } from "../services/redux/Cart";
 
 const Order = ({ id, title, price, quantity }) => {
-    const [count, setCount] = useState(quantity);
+    const dispatch = useDispatch();
 
-    const increase = () => {
-        setCount((count) => count + 1);
-        updateProduct();
+    const onIncrease = () => {
         console.log(id);
+        dispatch(increase(id));
     };
 
-    const decrease = () => {
-        if (count > 0) {
-            setCount((count) => count - 1);
-            updateProduct();
-        }
-    };
-
-    const updateProduct = async () => {
-        try {
-            const response = await axios("https://dummyjson.com/carts/2", {
-                method: "put",
-                headers: { "Content-Type": "application/json" },
-                data: JSON.stringify({
-                    products: [
-                        {
-                            id: id,
-                            quantity: count,
-                        },
-                    ],
-                }),
-            });
-            console.log(response);
-        } catch (error) {
-            console.log(error);
+    const onDecrease = () => {
+        if (quantity > 0) {
+            dispatch(decrease(id));
         }
     };
 
     return (
         <section className="order d-flex justify-content-between align-items-center my-5">
             <div>
-                <button className="order__delete">
+                <button type="button" className="order__delete">
                     <i className="bi bi-x-circle-fill"></i>
                 </button>
             </div>
@@ -54,15 +34,17 @@ const Order = ({ id, title, price, quantity }) => {
                     <Button
                         text="-"
                         style="btn-secondary p-0 fs13"
-                        onClick={decrease}
+                        onClick={onDecrease}
+                        type="button"
                     />
                 </span>
-                <span className="fw-semibold mx-3">{count}</span>
+                <span className="fw-semibold mx-3">{quantity}</span>
                 <span className="order__btn d-inline-block">
                     <Button
                         text="+"
                         style="btn-primary p-0 fs13"
-                        onClick={increase}
+                        onClick={onIncrease}
+                        type="button"
                     />
                 </span>
             </div>

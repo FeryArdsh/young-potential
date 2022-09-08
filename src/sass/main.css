@@ -5,7 +5,7 @@
   padding: 8px;
   font-size: 14px;
   background-color: #03AC0E;
-  color: #FFFFFF;
+  color: #ffffff;
   border: 1px solid transparent;
 }
 .btn-primary:hover {
@@ -241,6 +241,47 @@ input[name=delivery] {
   width: 100%;
 }
 
+.category__toko {
+  height: 100%;
+}
+.category__toko__img {
+  width: 74px;
+}
+.category__toko__rating {
+  background-color: #03AC0E;
+  font-size: 12px;
+  width: 53px;
+  bottom: -10px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.category__toko__description {
+  width: 230px;
+}
+.category__toko__address {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7A7A7A;
+  margin-bottom: 4px;
+}
+.category__toko__button {
+  padding: 4px 12px;
+  font-size: 8px;
+  border: none;
+  background-color: rgba(3, 172, 14, 0.1333333333);
+  border-radius: 100px;
+  color: #03AC0E;
+  font-weight: 600;
+  margin: 0 4px;
+}
+.category__toko__button:focus {
+  background-color: #03AC0E;
+  color: #ffffff;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -281,5 +322,5 @@ input[name=delivery] {
 }
 
 .err-color {
-  color: #F62845;
+  color: #f62845;
 }/*# sourceMappingURL=main.css.map */

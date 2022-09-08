@@ -3,21 +3,52 @@ import { endpoint } from "../utils/fetchApi";
 import axios from "axios";
 import Button from "../components/Button";
 import Header from "../components/Header";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import capitalize from "../utils/firstCapitalize";
+import Swal from "sweetalert2";
+import { addProduct } from "../services/redux/Cart";
+import { useDispatch, useSelector } from "react-redux";
+import loadingGif from "../assets/loading.gif";
 
 const DetailProduct = () => {
     const [data, setData] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const { idProduct } = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const getData = async () => {
         try {
+            setIsLoading(true);
             const response = await axios.get(
                 `${endpoint.getDetailProduct}/${idProduct}`
             );
             setData(response.data);
+            setIsLoading(false);
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
         }
+    };
+
+    const addToCart = () => {
+        const product = data;
+        product.quantity = 1;
+        dispatch(addProduct(product));
+        Swal.fire({
+            title: "Berhasil Ditambahkan",
+            icon: "success",
+            text: "Lihat keranjang Anda?",
+            showCancelButton: true,
+            cancelButtonText: "Nanti",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate("/carts");
+            }
+        });
     };
 
     useEffect(() => {
@@ -27,6 +58,11 @@ const DetailProduct = () => {
     return (
         <>
             <Header title="Detail Produk" />
+            {isLoading && (
+                <div className="text-center">
+                    <img src={loadingGif} alt="Loading..." />{" "}
+                </div>
+            )}
             {data && (
                 <main className="p-1 detail__product">
                     <img
@@ -51,7 +87,11 @@ const DetailProduct = () => {
                             {data.description}
                         </span>
                     </section>
-                    <Button text="Tambah Pesanan" style="btn-primary" />
+                    <Button
+                        text="Tambah Pesanan"
+                        style="btn-primary"
+                        onClick={addToCart}
+                    />
                 </main>
             )}
         </>

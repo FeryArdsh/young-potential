@@ -1,7 +1,7 @@
 import React from "react";
 import google from "../assets/google.png";
 
-const Button = ({ text, style, onClick }) => {
+const Button = ({ text, style, onClick, type }) => {
     const icon = (icon) => {
         if (icon === "Google") {
             return (
@@ -15,7 +15,7 @@ const Button = ({ text, style, onClick }) => {
     };
     return (
         <>
-            <button onClick={onClick} className={`fw600 ${style}`}>
+            <button type={type} onClick={onClick} className={`fw600 ${style}`}>
                 {icon(text)}
                 {text}
             </button>

@@ -8,33 +8,32 @@
     font-size: 14px;
 }
 
-.btn-primary{
+.btn-primary {
     @include button-primary;
     background-color: $primary;
-    color: #FFFFFF;
+    color: #ffffff;
     border: 1px solid transparent;
 
-    &:hover{
-        @include mixin.btn-hover($green, $white)
+    &:hover {
+        @include mixin.btn-hover($green, $white);
     }
 }
 
-.btn-secondary{
+.btn-secondary {
     @include button-primary;
     background-color: $white;
     border: 1px solid $primary;
     color: $primary;
-    
 
-    &:hover{
+    &:hover {
         @include mixin.btn-hover($primary, $white);
     }
 }
 
-.btn-shadow{
+.btn-shadow {
     box-shadow: 0px 8px 16px rgba(3, 172, 14, 0.24);
 }
 
-.fs13{
+.fs13 {
     font-size: 14px;
 }

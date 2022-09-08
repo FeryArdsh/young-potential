@@ -7,6 +7,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { endpoint } from "../utils/fetchApi";
 import Swal from "sweetalert2";
+import LOCAL_STORAGE from "../services/localStorage";
 
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../config/FirebaseConfig";
@@ -19,8 +20,9 @@ const Login = () => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = async ({ username, password }) => {
+    const onSubmit = async ({ username, password }, e) => {
         try {
+            e.preventDefault();
             const response = await axios(endpoint.sign_in, {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
@@ -29,9 +31,10 @@ const Login = () => {
                     password: password,
                 },
             });
-            console.log(response);
-            localStorage.setItem("firstName", response.data.firstName);
-            localStorage.setItem("id", response.data.id);
+            const { firstName, id } = await response.data;
+            LOCAL_STORAGE.saveNameUser(firstName);
+            LOCAL_STORAGE.saveIdUser(id);
+
             await Swal.fire("Login Berhasil!", "", "success");
             navigate("/");
         } catch (error) {
@@ -50,9 +53,11 @@ const Login = () => {
         signInWithPopup(auth, provider).then((result) => {
             // const credential = GoogleAuthProvider.credentialFromResult(result);
             // const token = credential.accessToken;
-            const user = result.user;
-            localStorage.setItem("firstName", user.displayName);
-            if (user) {
+            console.log(result);
+            const { displayName } = result.user;
+            LOCAL_STORAGE.saveNameUser(displayName);
+            LOCAL_STORAGE.saveIdUser(12);
+            if (displayName) {
                 navigate("/");
             }
         });

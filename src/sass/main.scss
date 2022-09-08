@@ -7,48 +7,48 @@
 @use "./pages/productByCategory";
 @use "./pages/detailProduct";
 @use "./pages/login";
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+@use "./pages/category";
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
 
-
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
 }
 
-.layout{
+.layout {
     max-width: 375px;
     width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.200);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 16px;
 }
 
-.fw600{
+.fw600 {
     font-weight: 600;
 }
 
-.fw500{
+.fw500 {
     font-weight: 500;
 }
 
-.fw400{
+.fw400 {
     font-weight: 400;
 }
 
-.fw600-fs14{
+.fw600-fs14 {
     font-weight: 600;
     font-size: 14px;
 }
 
-.fs14{
+.fs14 {
     font-size: 14px;
 }
 
-.fs10{
+.fs10 {
     font-size: 10px;
 }
 
-.err-color{
-    color: #F62845;
+.err-color {
+    color: #f62845;
 }

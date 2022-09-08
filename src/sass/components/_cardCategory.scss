@@ -1,11 +1,11 @@
-.category__card{
+.category__card {
     font-size: 12px;
     width: 73px;
     margin-bottom: 34px;
     transition: all 200ms;
     cursor: pointer;
-    
-    &:hover{
+
+    &:hover {
         transform: scale(1.1);
     }
 }
