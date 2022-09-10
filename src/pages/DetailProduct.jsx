@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import { addProduct } from "../services/redux/Cart";
 import { useDispatch, useSelector } from "react-redux";
 import loadingGif from "../assets/loading.gif";
+import FORMAT_RUPIAH from "../utils/FORMAT_RUPIAH";
 
 const DetailProduct = () => {
     const [data, setData] = useState(null);
@@ -33,7 +34,6 @@ const DetailProduct = () => {
 
     const addToCart = () => {
         const product = data;
-        product.quantity = 1;
         dispatch(addProduct(product));
         Swal.fire({
             title: "Berhasil Ditambahkan",
@@ -76,7 +76,7 @@ const DetailProduct = () => {
                     <div>
                         <div className="fw600-fs14 d-block">{data.title}</div>
                         <div className="fw600-fs14">
-                            Rp. {data.price * 1000}
+                            {FORMAT_RUPIAH(data.price * 14000)}
                         </div>
                     </div>
                     <section className="mt-5 mb-3">

@@ -3,7 +3,7 @@ import iconPickup from "../assets/icon-pickup.png";
 import logo from "../assets/logo.png";
 import logoPending from "../assets/logo-pending.png";
 
-const RadioBtn = ({ name, id }) => {
+const RadioBtn = ({ name, id, handleChangeDelivery }) => {
     const icon = (id) => {
         if (id === "pickup") {
             return iconPickup;
@@ -31,6 +31,8 @@ const RadioBtn = ({ name, id }) => {
                     type="radio"
                     name="delivery"
                     id={id}
+                    value={name}
+                    onChange={handleChangeDelivery}
                 />
             </div>
         </>

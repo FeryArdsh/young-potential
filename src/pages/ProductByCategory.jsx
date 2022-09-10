@@ -1,54 +1,30 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Swal from "sweetalert2";
 import Button from "../components/Button";
 import Header from "../components/Header";
+import IsLoading from "../components/IsLoading";
 import { endpoint } from "../utils/fetchApi";
 import capitalize from "../utils/firstCapitalize";
+import FORMAT_RUPIAH from "../utils/FORMAT_RUPIAH";
 
 const ProductByCategory = () => {
     const [products, setProducts] = useState([]);
     const { categoryName } = useParams();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(null);
 
     const getProductByCategory = async () => {
         try {
+            setLoading(IsLoading(true));
             const response = await axios.get(
                 `${endpoint.getProductByCategory}/${categoryName}`
             );
             setProducts(response.data.products);
-        } catch (error) {}
-    };
-
-    const addToCart = async () => {
-        try {
-            const response = await axios("https://dummyjson.com/carts/add", {
-                method: "post",
-                headers: { "Content-Type": "application/json" },
-                data: JSON.stringify({
-                    userId: 1,
-                    products: [
-                        {
-                            id: 1,
-                            quantity: 1,
-                        },
-                        {
-                            id: 50,
-                            quantity: 2,
-                        },
-                    ],
-                }),
-            });
-            console.log(response);
-            Swal.fire({
-                icon: "success",
-                title: "Produk berhasil ditambahkan",
-                text: "",
-                footer: '<a href="http://127.0.0.1:5173/carts">Lihat keranjang Anda</a>',
-            });
+            setLoading(IsLoading(false));
         } catch (error) {
             console.log(error);
+            setLoading(IsLoading(false));
         }
     };
 
@@ -63,6 +39,7 @@ const ProductByCategory = () => {
     return (
         <>
             <Header title={capitalize(categoryName)} />
+            {loading}
             <main className="d-flex flex-wrap">
                 {products?.map((item) => (
                     <section
@@ -85,7 +62,7 @@ const ProductByCategory = () => {
                             </div>
 
                             <div className="bycategory__price fw600">
-                                Rp. {item.price * 1000}
+                                {FORMAT_RUPIAH(item.price * 14000)}
                             </div>
                         </div>
 
@@ -93,7 +70,7 @@ const ProductByCategory = () => {
                             <Button
                                 text="Tambah"
                                 style="btn-secondary"
-                                onClick={addToCart}
+                                onClick={() => onDetailProduct(item.id)}
                             />
                         </div>
                     </section>

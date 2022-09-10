@@ -35,6 +35,10 @@
   font-size: 14px;
 }
 
+button[disabled] {
+  cursor: not-allowed;
+}
+
 .header .icon__back {
   color: #03AC0E;
   font-size: 30px;

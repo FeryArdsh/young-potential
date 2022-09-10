@@ -7,14 +7,23 @@ import Order from "../components/Order";
 import RadioBtn from "../components/RadioBtn";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearProduct, totalPrice } from "../services/redux/Cart";
+import FORMAT_RUPIAH from "../utils/FORMAT_RUPIAH";
 
 const Carts = () => {
     const { register } = useForm();
+    const [delivery, setDelivery] = useState("");
     const idCart = localStorage.getItem("id");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const cart = useSelector((state) => state.cart);
+
+    const handleChangeDelivery = (e) => {
+        setDelivery(e.target.value);
+    };
 
     // Get Product From Redux Cart //
     const getProducts = cart.products.map((product) => {
@@ -28,6 +37,13 @@ const Carts = () => {
     const addNewCarts = async (e) => {
         try {
             e.preventDefault();
+            if (!delivery) {
+                return Swal.fire(
+                    "Gagal ditambahkan",
+                    "Metode pengiriman belum dipilih",
+                    "error"
+                );
+            }
             const response = await axios("https://dummyjson.com/carts/add", {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
@@ -36,12 +52,18 @@ const Carts = () => {
                     products: getProducts,
                 }),
             });
+            dispatch(clearProduct());
             Swal.fire("Berhasil ditambahkan", "", "success");
+            navigate("/");
             console.log(response);
         } catch (error) {
             console.log(error);
         }
     };
+
+    useEffect(() => {
+        dispatch(totalPrice());
+    }, [cart]);
 
     return (
         <main>
@@ -49,11 +71,31 @@ const Carts = () => {
             <form onSubmit={addNewCarts}>
                 <section>
                     <h6 className="fw600">Pilih Metode Pengiriman</h6>
-                    <RadioBtn name="Pickup / Diambil" id="pickup" />
-                    <RadioBtn name="Express / Kirim Cepat" id="express" />
-                    <RadioBtn name="09:00 - 11:00" id="sesi1" />
-                    <RadioBtn name="12:00 - 16:00" id="sesi2" />
-                    <RadioBtn name="18:00 - 20:00" id="sesi3" />
+                    <RadioBtn
+                        name="Pickup / Diambil"
+                        id="pickup"
+                        handleChangeDelivery={handleChangeDelivery}
+                    />
+                    <RadioBtn
+                        name="Express / Kirim Cepat"
+                        id="express"
+                        handleChangeDelivery={handleChangeDelivery}
+                    />
+                    <RadioBtn
+                        name="09:00 - 11:00"
+                        id="sesi1"
+                        handleChangeDelivery={handleChangeDelivery}
+                    />
+                    <RadioBtn
+                        name="12:00 - 16:00"
+                        id="sesi2"
+                        handleChangeDelivery={handleChangeDelivery}
+                    />
+                    <RadioBtn
+                        name="18:00 - 20:00"
+                        id="sesi3"
+                        handleChangeDelivery={handleChangeDelivery}
+                    />
                 </section>
 
                 <section className="d-flex justify-content-between align-items-center mt-5 border-bottom pb-2">
@@ -77,7 +119,9 @@ const Carts = () => {
                 </div>
                 <section className="d-flex justify-content-between align-items-center mt-5">
                     <h6 className="fw600-fs14 d-inline m-0">Total Harga</h6>
-                    <span className="fw600-fs14">Rp. 12.000</span>
+                    <span className="fw600-fs14">
+                        {FORMAT_RUPIAH(cart.total * 14000)}
+                    </span>
                 </section>
 
                 <section className="d-flex justify-content-between align-items-center mt-4 border-bottom pb-2">
@@ -96,13 +140,21 @@ const Carts = () => {
                     <h6 className="fw500 fs14 d-inline m-0">
                         Total Pembayaran
                     </h6>
-                    <span className="fw500 fs14">Rp. 12.000</span>
+                    <span className="fw500 fs14">
+                        {FORMAT_RUPIAH(cart.total * 14000)}
+                    </span>
                 </section>
-                <Button
-                    text="Buat Pesanan"
-                    style="btn-primary mt-3"
-                    type="submit"
-                />
+                {cart.products.length >= 1 ? (
+                    <Button
+                        text="Buat Pesanan"
+                        style="btn-primary mt-3"
+                        type="submit"
+                    />
+                ) : (
+                    <button className="btn-primary mt-3" type="submit" disabled>
+                        Buat Pesanan
+                    </button>
+                )}
             </form>
         </main>
     );

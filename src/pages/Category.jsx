@@ -7,23 +7,27 @@ import Header from "../components/Header";
 import categoryImg from "../assets/category.png";
 import capitalize from "../utils/firstCapitalize";
 import toko from "../assets/toko.png";
+import IsLoading from "../components/IsLoading";
 
 const Category = () => {
     const [category, setCategory] = useState([]);
+    const [loading, setLoading] = useState(null);
     const navigate = useNavigate();
 
     const getListCategory = async () => {
         try {
+            setLoading(IsLoading(true));
             const response = await axios.get(endpoint.getListCategory);
             setCategory(response.data);
+            setLoading(IsLoading(false));
         } catch (error) {
             console.log(error);
+            setLoading(IsLoading(false));
         }
     };
 
     useEffect(() => {
         getListCategory();
-        console.log(category);
     }, []);
 
     const handleClickCategory = (i) => {
@@ -65,6 +69,7 @@ const Category = () => {
             </section>
 
             <h6 className="fw600 my-4">Kategori Produk</h6>
+            {loading}
             <main className="d-flex justify-content-between flex-wrap">
                 {category?.map((cat, i) => (
                     <section

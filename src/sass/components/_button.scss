@@ -37,3 +37,7 @@
 .fs13 {
     font-size: 14px;
 }
+
+button[disabled] {
+    cursor: not-allowed;
+}
