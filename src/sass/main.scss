@@ -4,10 +4,12 @@
 @use "./components/input";
 @use "./components/radioBtn";
 @use "./components/order";
+@use "./components/transaction";
 @use "./pages/productByCategory";
 @use "./pages/detailProduct";
 @use "./pages/login";
 @use "./pages/category";
+@use "./pages/orderList";
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
 
 * {
@@ -45,10 +47,17 @@
     font-size: 14px;
 }
 
+.fs12 {
+    font-size: 12px;
+}
 .fs10 {
     font-size: 10px;
 }
 
 .err-color {
     color: #f62845;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }

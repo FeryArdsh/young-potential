@@ -1,33 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { endpoint } from "../utils/fetchApi";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
-import axios from "axios";
 import Header from "../components/Header";
 import categoryImg from "../assets/category.png";
 import capitalize from "../utils/firstCapitalize";
 import toko from "../assets/toko.png";
 import IsLoading from "../components/IsLoading";
+import Product from "../services/api/Product";
 
 const Category = () => {
     const [category, setCategory] = useState([]);
-    const [loading, setLoading] = useState(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const getListCategory = async () => {
-        try {
-            setLoading(IsLoading(true));
-            const response = await axios.get(endpoint.getListCategory);
-            setCategory(response.data);
-            setLoading(IsLoading(false));
-        } catch (error) {
-            console.log(error);
-            setLoading(IsLoading(false));
-        }
-    };
-
     useEffect(() => {
-        getListCategory();
+        const fetch = async () => {
+            try {
+                setLoading(IsLoading(true));
+                const response = await Product.getListCategory();
+                setCategory(response.data);
+                setLoading(IsLoading(false));
+            } catch (error) {
+                console.log(error);
+                setLoading(IsLoading(false));
+            }
+        };
+        fetch();
     }, []);
 
     const handleClickCategory = (i) => {

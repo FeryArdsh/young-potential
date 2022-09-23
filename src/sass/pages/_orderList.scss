@@ -1,0 +1,10 @@
+@use "../abstracts/variabels" as *;
+
+.transaction__select {
+    color: $gray;
+
+    &__active {
+        color: $primary;
+        border-bottom: 3px solid $primary;
+    }
+}

@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import cuate from "../assets/cuate.png";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import axios from "axios";
 import { useForm } from "react-hook-form";
-import { endpoint } from "../utils/fetchApi";
+import Auth from "../services/api/Auth";
 import Swal from "sweetalert2";
-import LOCAL_STORAGE from "../services/localStorage";
-
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../config/FirebaseConfig";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -20,51 +15,31 @@ const Login = () => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = async ({ username, password }, e) => {
+    const onLogin = async ({ username, password }, e) => {
         try {
             e.preventDefault();
-            const response = await axios(endpoint.sign_in, {
-                method: "post",
-                headers: { "Content-Type": "application/json" },
-                data: {
-                    username: username,
-                    password: password,
-                },
-            });
-            const { firstName, id } = await response.data;
-            LOCAL_STORAGE.saveNameUser(firstName);
-            LOCAL_STORAGE.saveIdUser(id);
-
+            await Auth.login(username, password);
             await Swal.fire("Login Berhasil!", "", "success");
             navigate("/");
         } catch (error) {
             if (error.response.data.message === "Invalid credentials") {
-                await Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Username atau Password Salah!",
-                });
+                await Swal.fire(
+                    "Opss..",
+                    "Username atau Password Salah!",
+                    "error"
+                );
             }
+            console.log(error);
         }
     };
 
-    const handleSignInGoogle = () => {
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider).then((result) => {
-            // const credential = GoogleAuthProvider.credentialFromResult(result);
-            // const token = credential.accessToken;
-            console.log(result);
-            const { displayName } = result.user;
-            LOCAL_STORAGE.saveNameUser(displayName);
-            LOCAL_STORAGE.saveIdUser(12);
+    const authGoogle = async (e) => {
+        try {
+            e.preventDefault();
+            const displayName = await Auth.loginGoogle();
             if (displayName) {
                 navigate("/");
             }
-        });
-    };
-    const authGoogle = () => {
-        try {
-            handleSignInGoogle();
         } catch (error) {
             console.log(error);
         }
@@ -76,7 +51,7 @@ const Login = () => {
 
             <h4 className="mb-0 fw-bold login__title">Hai, fren!</h4>
             <p>Selamat Datang di Aplikasi WoiShop</p>
-            <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
+            <form className="login__form" onSubmit={handleSubmit(onLogin)}>
                 <Input
                     type="text"
                     text="Username"

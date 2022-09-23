@@ -1,0 +1,23 @@
+@use "../abstracts/variabels" as *;
+
+.transaction__card {
+    background-color: $white;
+    border-radius: 16px;
+    padding: 16px;
+    margin-top: 16px;
+
+    &__status {
+        background-color: #31b057;
+        padding: 4px 12px;
+        color: #fff;
+        font-size: 8px;
+    }
+
+    &__desc {
+        color: $gray;
+    }
+
+    &__date {
+        font-size: 12px;
+    }
+}

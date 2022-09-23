@@ -175,6 +175,25 @@ input[name=delivery] {
   white-space: nowrap;
 }
 
+.transaction__card {
+  background-color: #FAFAFA;
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 16px;
+}
+.transaction__card__status {
+  background-color: #31b057;
+  padding: 4px 12px;
+  color: #fff;
+  font-size: 8px;
+}
+.transaction__card__desc {
+  color: #7A7A7A;
+}
+.transaction__card__date {
+  font-size: 12px;
+}
+
 .bycategory__container {
   width: 104px;
   margin-bottom: 30px;
@@ -286,6 +305,14 @@ input[name=delivery] {
   color: #ffffff;
 }
 
+.transaction__select {
+  color: #7A7A7A;
+}
+.transaction__select__active {
+  color: #03AC0E;
+  border-bottom: 3px solid #03AC0E;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -321,10 +348,18 @@ input[name=delivery] {
   font-size: 14px;
 }
 
+.fs12 {
+  font-size: 12px;
+}
+
 .fs10 {
   font-size: 10px;
 }
 
 .err-color {
   color: #f62845;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }/*# sourceMappingURL=main.css.map */

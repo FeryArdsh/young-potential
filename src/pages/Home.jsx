@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
 import Button from "../components/Button";
 import LOCAL_STORAGE from "../services/localStorage";
+import Auth from "../services/api/Auth";
+import Swal from "sweetalert2";
 
 const Home = () => {
     const [name, setName] = useState("");
-    const logout = () => {
-        LOCAL_STORAGE.removeNameUser();
-        LOCAL_STORAGE.removeIdUser();
-        setName(LOCAL_STORAGE.getNameUser());
+
+    const onLogout = () => {
+        Auth.logout();
+        setName(LOCAL_STORAGE.getDataUser());
         Swal.fire("Berhasil Logout", "", "success");
     };
+
     useEffect(() => {
-        setName(LOCAL_STORAGE.getNameUser());
+        setName(LOCAL_STORAGE.getDataUser());
     }, []);
 
     return (
         <>
             <h1>Home</h1>
             {name ? (
-                <h3 className="text-success">Welcome Back {name}!!!</h3>
+                <h3 className="text-success">
+                    Welcome Back {name.firstName}!!!
+                </h3>
             ) : (
                 <h3 className="text-danger">Kamu belum login !!!</h3>
             )}
@@ -39,7 +43,7 @@ const Home = () => {
                     <Button
                         text="Logout"
                         style="btn-secondary mt-4"
-                        onClick={logout}
+                        onClick={onLogout}
                     />
                 ) : (
                     <Link to="login">

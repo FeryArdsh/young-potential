@@ -5,17 +5,18 @@ import Header from "../components/Header";
 import Input from "../components/Input";
 import Order from "../components/Order";
 import RadioBtn from "../components/RadioBtn";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearProduct, totalPrice } from "../services/redux/Cart";
 import FORMAT_RUPIAH from "../utils/FORMAT_RUPIAH";
+import Cart from "../services/api/Cart";
+import LOCAL_STORAGE from "../services/localStorage";
 
 const Carts = () => {
     const { register } = useForm();
     const [delivery, setDelivery] = useState("");
-    const idCart = localStorage.getItem("id");
+    const userId = LOCAL_STORAGE.getDataUser();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -44,19 +45,17 @@ const Carts = () => {
                     "error"
                 );
             }
-            const response = await axios("https://dummyjson.com/carts/add", {
-                method: "post",
-                headers: { "Content-Type": "application/json" },
-                data: JSON.stringify({
-                    userId: idCart,
-                    products: getProducts,
-                }),
-            });
+            const response = await Cart.addNewCart(userId.id, getProducts);
             dispatch(clearProduct());
             Swal.fire("Berhasil ditambahkan", "", "success");
-            navigate("/");
+            navigate("/order-list");
             console.log(response);
         } catch (error) {
+            if (error.response.data.message === "User id is required") {
+                return Swal.fire("Kamu belum login", "", "error").then(() => {
+                    navigate("/login");
+                });
+            }
             console.log(error);
         }
     };

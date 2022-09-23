@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { endpoint } from "../utils/fetchApi";
-import axios from "axios";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import capitalize from "../utils/firstCapitalize";
 import Swal from "sweetalert2";
 import { addProduct } from "../services/redux/Cart";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import loadingGif from "../assets/loading.gif";
 import FORMAT_RUPIAH from "../utils/FORMAT_RUPIAH";
+import Product from "../services/api/Product";
+import LOCAL_STORAGE from "../services/localStorage";
 
 const DetailProduct = () => {
     const [data, setData] = useState(null);
@@ -17,22 +17,29 @@ const DetailProduct = () => {
     const { idProduct } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const dataUser = LOCAL_STORAGE.getDataUser();
 
-    const getData = async () => {
-        try {
-            setIsLoading(true);
-            const response = await axios.get(
-                `${endpoint.getDetailProduct}/${idProduct}`
-            );
-            setData(response.data);
-            setIsLoading(false);
-        } catch (error) {
-            console.log(error);
-            setIsLoading(false);
-        }
-    };
+    useEffect(() => {
+        const fetch = async () => {
+            try {
+                setIsLoading(true);
+                const response = await Product.getDetailProduct(idProduct);
+                setData(response.data);
+                setIsLoading(false);
+            } catch (error) {
+                console.log(error);
+                setIsLoading(false);
+            }
+        };
+        fetch();
+    }, []);
 
     const addToCart = () => {
+        if (!dataUser) {
+            return Swal.fire("Kamu belum login", "", "error").then(() => {
+                navigate("/login");
+            });
+        }
         const product = data;
         dispatch(addProduct(product));
         Swal.fire({
@@ -50,10 +57,6 @@ const DetailProduct = () => {
             }
         });
     };
-
-    useEffect(() => {
-        getData();
-    }, []);
 
     return (
         <>

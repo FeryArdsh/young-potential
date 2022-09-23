@@ -1,10 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import IsLoading from "../components/IsLoading";
-import { endpoint } from "../utils/fetchApi";
+import Product from "../services/api/Product";
 import capitalize from "../utils/firstCapitalize";
 import FORMAT_RUPIAH from "../utils/FORMAT_RUPIAH";
 
@@ -14,22 +13,21 @@ const ProductByCategory = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(null);
 
-    const getProductByCategory = async () => {
-        try {
-            setLoading(IsLoading(true));
-            const response = await axios.get(
-                `${endpoint.getProductByCategory}/${categoryName}`
-            );
-            setProducts(response.data.products);
-            setLoading(IsLoading(false));
-        } catch (error) {
-            console.log(error);
-            setLoading(IsLoading(false));
-        }
-    };
-
     useEffect(() => {
-        getProductByCategory();
+        const fetch = async () => {
+            try {
+                setLoading(IsLoading(true));
+                const response = await Product.getProductByCategory(
+                    categoryName
+                );
+                setProducts(response.data.products);
+                setLoading(IsLoading(false));
+            } catch (error) {
+                console.log(error);
+                setLoading(IsLoading(false));
+            }
+        };
+        fetch();
     }, []);
 
     const onDetailProduct = (id) => {

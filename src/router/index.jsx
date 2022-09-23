@@ -6,6 +6,7 @@ import DetailProduct from "../pages/DetailProduct";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
+import OrderList from "../pages/OrderList";
 import ProductByCategory from "../pages/ProductByCategory";
 import Register from "../pages/Register";
 import Tips from "../pages/Tips";
@@ -21,6 +22,7 @@ const Router = () => {
             <Route path="verifikasi" element={<Verifikasi />} />
             <Route path="carts" element={<Carts />} />
             <Route path="tips" element={<Tips />} />
+            <Route path="order-list" element={<OrderList />} />
             <Route
                 path="category/:categoryName"
                 element={<ProductByCategory />}

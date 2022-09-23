@@ -1,21 +1,12 @@
 const LOCAL_STORAGE = {
-    saveNameUser(firstName) {
-        return localStorage.setItem("firstName", firstName);
+    saveDataUser(data) {
+        return localStorage.setItem("user", JSON.stringify(data));
     },
-    saveIdUser(id) {
-        return localStorage.setItem("id", id);
+    getDataUser() {
+        return JSON.parse(localStorage.getItem("user"));
     },
-    getNameUser() {
-        return localStorage.getItem("firstName");
-    },
-    getidUser() {
-        return localStorage.getItem("id");
-    },
-    removeNameUser() {
-        return localStorage.removeItem("firstName");
-    },
-    removeIdUser() {
-        return localStorage.removeItem("id");
+    removeDataUser() {
+        return localStorage.removeItem("user");
     },
 };
 
